@@ -1,0 +1,49 @@
+const Button = (props) => {  
+  return (
+    <button
+      onClick={props.toggle}
+      >
+      {props.name}
+    </button>
+  )
+}
+
+class Message extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = { isOpen: false }
+    this.toggle = this.toggle.bind(this);
+  }
+  
+  toggle() {
+    this.setState(prevState => ({
+      isOpen: !prevState.isOpen
+    }));
+  }
+
+  render() {
+    return(
+      <div class="container mg-top">
+        <Button 
+          name={this.state.isOpen ? "Stop" : "Start"}  
+          toggle={this.toggle}
+        />
+        
+        {this.state.isOpen && 
+          <div class="card-panel pink darken-2">
+            <span class="green-text">
+              Studying has commenced!
+            </span>
+          </div>
+        }
+        
+      </div>
+    );
+  } 
+}
+
+ReactDOM.render(
+  <Message />,
+  document.getElementById('root')
+);
